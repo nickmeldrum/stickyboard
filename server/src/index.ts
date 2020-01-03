@@ -43,7 +43,7 @@ app.route('/api/stickies/:stickyId')
     else {
       stickies.push(req.body);
     }
-    res.sendStatus(200);
+    res.status(200).send({message: 'success'});
   });
 
 app.route('/api/boards')

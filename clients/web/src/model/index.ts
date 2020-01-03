@@ -1,4 +1,5 @@
 import { action, Action } from 'easy-peasy';
+import api from 'api';
 
 export interface Board {
   columns: string[];
@@ -44,13 +45,7 @@ const model: Model = {
       const sticky = state.items.find(s => s.id === payload.id)
       if (!sticky) throw new Error('no sticky');
       sticky.text = payload.text;
-      fetch(`http://localhost:4000/api/stickies/${sticky.id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(sticky),
-      });
+      api.stickies.save(sticky);
     }),
   },
 };
