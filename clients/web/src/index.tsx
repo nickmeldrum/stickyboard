@@ -4,30 +4,35 @@ import App from './App';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
 import theme from './theme';
-import { createStore } from 'easy-peasy';
-import { StoreProvider } from 'easy-peasy';
-import { action } from 'easy-peasy';
+import { createStore, StoreProvider, action } from 'easy-peasy';
 import * as serviceWorker from './serviceWorker';
-import { Model  } from './model';
+import { Model } from './model';
 
 const model: Model = {
   boards: {
-    board1: {
-      columns: [ 'todo', 'doing', 'done' ],
-    },
+    items: {},
+    initialLoad: action((state, payload) => {
+      state.items = payload;
+    }),
   },
   stickies: {
-    list: [
-      {
-        id: '1',
-        board: 'board1',
-        text: 'oh hai',
-      },
-    ],
+    items: [],
+    initialLoad: action((state, payload) => {
+      state.items = payload;
+    }),
     updateStickyText: action((state, payload) => {
-      const sticky = state.list.find(s => s.id === payload.id)
+      const sticky = state.items.find(s => s.id === payload.id)
       if (!sticky) throw new Error('no sticky');
       sticky.text = payload.text;
+      fetch(`http://localhost:4000/api/stickies/${sticky.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(sticky),
+      }).then((response) => {
+        console.log('done');
+      });
     }),
   },
 };
@@ -44,6 +49,15 @@ ReactDOM.render(
   </StoreProvider>,
   document.getElementById('root'),
 );
+
+fetch('http://localhost:4000/api/boards').then(response => response.json()).then((data) => {
+  const actions = store.getActions();
+  actions.boards.initialLoad(data);
+});
+fetch('http://localhost:4000/api/stickies').then(response => response.json()).then((data) => {
+  const actions = store.getActions();
+  actions.stickies.initialLoad(data);
+});
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

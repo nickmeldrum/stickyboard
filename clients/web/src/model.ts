@@ -10,10 +10,16 @@ export interface Sticky {
   text: string;
 };
 
-export type Boards = { [key: string]: Board };
+export type BoardList = { [key: string]: Board };
+
+export type Boards = {
+  items: BoardList;
+  initialLoad: Action<Boards, BoardList>;
+};
 
 export interface Stickies {
-  list: Sticky[];
+  items: Sticky[];
+  initialLoad: Action<Stickies, Sticky[]>;
   updateStickyText: Action<Stickies, Sticky>;
 };
 

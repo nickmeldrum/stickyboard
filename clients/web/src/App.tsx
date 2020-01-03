@@ -9,10 +9,11 @@ import { Sticky } from './model';
 
 function StickyBox() {
   const sticky: Sticky = useStoreState(state => {
-    return state.stickies.list.filter((s: Sticky) => s.board === 'board1')[0];
+    return state.stickies.items.filter((s: Sticky) => s.board === 'board1')[0];
   });
+  const stickyText = sticky ? sticky.text : 'no-sticky-yet';
   return (
-    <div>{sticky.text}</div>
+    <div>{stickyText}</div>
   );
 }
 

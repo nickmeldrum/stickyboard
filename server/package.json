@@ -1,0 +1,25 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "yarn clean && npx tsc",
+    "dev": "yarn build && yarn run:server",
+    "start": "nodemon --watch src -e ts --exec yarn dev",
+    "run:server": "node ."
+  },
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.6",
+    "@types/express": "^4.17.2",
+    "@types/node": "^13.1.2",
+    "nodemon": "^2.0.2",
+    "rimraf": "^3.0.0",
+    "typescript": "^3.7.4"
+  }
+}
