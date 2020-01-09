@@ -1,5 +1,5 @@
 import { setupApi } from './api-call';
-import { Sticky, BoardList } from 'model';
+import { Sticky, BoardList } from 'model/data';
 
 const host = 'http://localhost:4000';
 const baseUrl = '/api/'

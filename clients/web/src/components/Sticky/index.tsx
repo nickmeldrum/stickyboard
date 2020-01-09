@@ -1,14 +1,14 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import { Sticky as StickyModel } from 'model';
+import { Sticky as StickyModel } from 'model/data';
 import { useStoreState, useStoreActions } from 'store/hooks';
 
 const Sticky: React.FC = () => {
   const updateStickyText = useStoreActions(actions => {
-    return actions.stickies.updateStickyText;
+    return actions.data.stickies.updateStickyText;
   });
   const sticky: StickyModel = useStoreState(state => {
-    return state.stickies.items.filter((s: StickyModel) => s.board === 'board1')[0];
+    return state.data.stickies.items.filter((s: StickyModel) => s.board === 'board1')[0];
   });
   const stickyText = sticky ? sticky.text : 'no-sticky-yet';
   const buttonClicked = () => {
