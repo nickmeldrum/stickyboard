@@ -1,4 +1,6 @@
-import { createStore } from 'easy-peasy';
+import { createStore, reducer } from 'easy-peasy';
+import { routerMiddleware, routerReducer } from './router';
 import model from 'model';
 
-export default createStore(model);
+model.router = reducer(routerReducer);
+export default createStore(model, {middleware: [routerMiddleware]});
