@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
 const Board: React.FC = () => {
   const board = useStoreState(state => state.data.boards.currentBoard);
   const classes = useStyles();
-  if (!board) return <div>cannot find currentboard</div>
+  if (!board) return <div>Loading...</div>
   return (
     <div className={classes.board}>
       board: {board.id}

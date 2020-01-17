@@ -12,13 +12,14 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Columns: React.FC<ColumnsProps> = (props) => {
+const Columns: React.FC<ColumnsProps> = ({board}) => {
   const classes = useStyles();
   return (
     <div className={classes.columns}>
-    {props.board.columns.map(col => <Column
+    {board.columns.map(col => <Column
         key={col}
-         />
+        column={col}
+      />
     )}
     </div>
   );
