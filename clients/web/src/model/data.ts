@@ -1,4 +1,5 @@
-import { action, Action, thunk, Thunk } from 'easy-peasy';
+import { action, Action, computed, Computed, thunk, Thunk } from 'easy-peasy';
+import { Model } from './index';
 import api from 'api';
 
 export interface Board {
@@ -16,6 +17,7 @@ export interface BoardList { [key: string]: Board };
 
 export type Boards = {
   items: BoardList;
+  currentBoard: Computed<Boards, Board | null, Model>;
   initialLoad: Action<Boards, BoardList>;
 };
 
@@ -34,6 +36,15 @@ export interface Data {
 const data: Data = {
   boards: {
     items: {},
+    currentBoard: computed([
+      state => state.items,
+      (state, storeState) => storeState.router.location.pathname,
+    ], 
+      (boardItems, pathname) => {
+        const id = pathname.startsWith('/boards/') ? pathname.substring(8) : null;
+        return id ? boardItems[id] : null;
+      },
+    ),
     initialLoad: action((state, payload) => {
       state.items = payload;
     }),

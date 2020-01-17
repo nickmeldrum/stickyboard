@@ -17,12 +17,12 @@ const stickies = [
   },
 ];
 
-const boards = [
-  {
+const boards = {
+  'board1': {
     id: 'board1',
     columns: ['column1', 'column2'],
   },
-];
+};
 
 app.listen(port, () => {
     console.log(`server started at http://localhost:${ port }`);
