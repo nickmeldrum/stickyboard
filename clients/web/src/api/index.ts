@@ -1,5 +1,5 @@
 import { setupApi } from './api-call';
-import { Sticky, BoardList } from 'model/data';
+import { Board, Sticky } from 'model/data';
 
 const host = 'http://localhost:4000';
 const baseUrl = '/api/'
@@ -8,10 +8,10 @@ const { get, put } = setupApi(host, baseUrl);
 
 export default {
   boards: {
-    get: async (): Promise<BoardList> => get('boards'),
+    get: async (): Promise<string[]> => get('boards'),
   },
-  stickies: {
-    get: async (): Promise<Sticky[]> => get('stickies'),
+  board: {
+    get: async (boardId: string): Promise<Board> => get(`boards/${boardId}`),
     save: async (sticky: Sticky): Promise<void> => put(`stickies/${sticky.id}`, sticky),
   },
 };

@@ -1,24 +1,24 @@
-import { action, Action, computed, Computed, thunk, Thunk } from 'easy-peasy';
-import { Model } from './index';
+import { action, Action, thunk, Thunk } from 'easy-peasy';
 import api from 'api';
 
 export interface Board {
   id: string;
   columns: string[];
+  stickies: Sticky[];
 };
 
 export interface Sticky {
   id: string;
-  board: string;
+  column: string;
   text: string;
 };
 
-export interface BoardList { [key: string]: Board };
-
 export type Boards = {
-  items: BoardList;
-  currentBoard: Computed<Boards, Board | null, Model>;
-  initialLoad: Action<Boards, BoardList>;
+  itemNames: string[];
+  currentBoard: Board | null;
+  setCurrentBoard: Action<Boards, Board>;
+  fetchBoardByName: Thunk<Boards, string>;
+  initialLoad: Action<Boards, string[]>;
 };
 
 export interface Stickies {
@@ -35,18 +35,17 @@ export interface Data {
 
 const data: Data = {
   boards: {
-    items: {},
-    currentBoard: computed([
-      state => state.items,
-      (state, storeState) => storeState.router.location.pathname,
-    ], 
-      (boardItems, pathname) => {
-        const id = pathname.startsWith('/boards/') ? pathname.substring(8) : null;
-        return id ? boardItems[id] : null;
-      },
-    ),
+    itemNames: [],
+    currentBoard: null,
+    setCurrentBoard: action((state, payload) => {
+      state.currentBoard = payload;
+    }),
+    fetchBoardByName: thunk(async (actions, payload) => {
+      const board: Board = await api.board.get(payload);
+      actions.setCurrentBoard(board);
+    }),
     initialLoad: action((state, payload) => {
-      state.items = payload;
+      state.itemNames = payload;
     }),
   },
   stickies: {
@@ -61,7 +60,7 @@ const data: Data = {
     }),
     sendUpdateStickyText: thunk(async (actions, payload) => {
       actions.updateStickyText(payload)
-      api.stickies.save(payload);
+      api.board.save(payload);
     }),
   },
 };

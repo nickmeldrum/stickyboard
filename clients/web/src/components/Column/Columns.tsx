@@ -9,6 +9,10 @@ export interface ColumnsProps {
 
 const useStyles = makeStyles(theme => ({
   columns: {
+    flexGrow: 1,
+    display: 'flex',
+    alignItems: 'stretch',
+    marginTop: '20px'
   },
 }));
 

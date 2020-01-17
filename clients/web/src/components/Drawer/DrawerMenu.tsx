@@ -9,10 +9,9 @@ import AddIcon from '@material-ui/icons/Add';
 import BoardIcon from '@material-ui/icons/Dashboard';
 import HomeIcon from '@material-ui/icons/Home';
 import { useStoreState, useStoreActions } from 'store/hooks';
-import { BoardList } from 'model/data';
 
 const DrawerMenu: React.FC = () => {
-  const boards: BoardList = useStoreState(state => state.data.boards.items);
+  const boardNames = useStoreState(state => state.data.boards.itemNames);
   const push = useStoreActions(actions => actions.routing.push);
   const toggleDrawer = useStoreActions(actions => actions.ui.toggleDrawer);
 
@@ -41,11 +40,11 @@ const DrawerMenu: React.FC = () => {
             <ListItemText primary='Add new board' />
           </ListItem>
 
-            {Object.values(boards).map(board => {
+            {boardNames.map(boardName => {
               return (
-            <ListItem button key={board.id} onClick={() => browseTo(`/boards/${board.id}`)}>
+            <ListItem button key={boardName} onClick={() => browseTo(`/boards/${boardName}`)}>
                   <ListItemIcon><BoardIcon /></ListItemIcon>
-                  <ListItemText primary={board.id} />
+                  <ListItemText primary={boardName} />
                 </ListItem>
               );
             })}
