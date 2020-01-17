@@ -1,8 +1,11 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { Sticky as StickyModel } from 'model/data';
+import Sticky from 'components/Sticky';
 
 export interface ColumnProps {
   column: String;
+  stickies: StickyModel[];
 };
 
 const useStyles = makeStyles(theme => ({
@@ -19,13 +22,19 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Column: React.FC<ColumnProps> = ({column}) => {
+const Column: React.FC<ColumnProps> = ({column, stickies}) => {
   const classes = useStyles();
   return (
-    <>
-    <div className={classes.column}>
-      <h2 className={classes.heading}>{column}</h2>
-    </div>
+  <>
+  <div className={classes.column}>
+    <h2 className={classes.heading}>{column}</h2>
+    <ul>{stickies.map(sticky =>
+      <Sticky
+          key={sticky.id}
+          sticky={sticky}
+      />)}
+    </ul>
+  </div>
   </>
   );
 }

@@ -23,6 +23,7 @@ const Columns: React.FC<ColumnsProps> = ({board}) => {
     {board.columns.map(col => <Column
         key={col}
         column={col}
+        stickies={board.stickies.filter(s => s.column === col)}
       />
     )}
     </div>
