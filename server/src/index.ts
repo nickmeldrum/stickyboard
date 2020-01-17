@@ -34,11 +34,32 @@ const stickies: Sticky[] = [
     boardId: 'board1',
     column: 'column1',
   },
+  {
+    id: '2',
+    text: 'a sticky on the same column',
+    boardId: 'board1',
+    column: 'column1',
+  },
+  {
+    id: '3',
+    text: 'another sticky',
+    boardId: 'board1',
+    column: 'column2',
+  },
+  {
+    id: '4',
+    text: 'a sticky on the next board',
+    boardId: 'board2',
+    column: 'columnb',
+  },
 ];
 
 const boards: BoardList = {
   'board1': {
     columns: ['column1', 'column2'],
+  },
+  'board2': {
+    columns: ['columna', 'columnb', 'columnc'],
   },
 };
 
