@@ -17,7 +17,23 @@ Server uses Express - also `yarn start` to start it (it uses nodemon as a file w
 
 ### Web client
 
- * 
+drag n drop
+
+ * save the column change
+ * show the drag over
+ * fix bug to not allow drop on own column
+
+sticky
+
+ * edit text
+ * delete sticky
+ * add sticky
+
+board
+
+ * add board
+ * board admin - rename/delete
+ * add column/ rename column
 
 ### Mobile client
 
@@ -27,5 +43,7 @@ Server uses Express - also `yarn start` to start it (it uses nodemon as a file w
 
 ### Backend
 
+ * https://aws.amazon.com/blogs/mobile/building-fine-grained-authorization-using-amazon-cognito-user-pools-groups/
+ * https://aws.amazon.com/blogs/compute/using-amazon-api-gateway-as-a-proxy-for-dynamodb/
  * research and setup cognito auth - with facebook/google/github integration?
  * look into how easy cognito/dynamo/gateway??? without server would be?
