@@ -20,8 +20,12 @@ Server uses Express - also `yarn start` to start it (it uses nodemon as a file w
 drag n drop
 
  * save the column change
- * show the drag over
- * fix bug to not allow drop on own column
+
+styling:
+
+ * make column full height (at least)
+ * show no-entry mouse pointer when can't drop
+ * show scrollbar when minwidth hit
 
 sticky
 
