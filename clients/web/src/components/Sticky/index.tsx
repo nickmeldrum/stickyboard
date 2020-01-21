@@ -70,7 +70,7 @@ const Sticky: React.FC<StickyProps> = ({ sticky }) => {
     <div className={stickyContainerClasses} ref={drag}>
       <Card className={classes.card}>
         <CardContent>
-          { isEditing ? <EditText initialText={sticky.text} acceptChanges={acceptChanges} cancelEditing={cancelEditing} /> : StickyText }
+          { isEditing || sticky.id === 'new' ? <EditText initialText={sticky.text} acceptChanges={acceptChanges} cancelEditing={cancelEditing} /> : StickyText }
         </CardContent>
         <CardActions>
           <IconButton className={classes.deleteButton} aria-label="delete sticky" onClick={deleteStickyClicked}>

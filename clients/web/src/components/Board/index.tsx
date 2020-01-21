@@ -29,6 +29,7 @@ const useStyles = makeStyles(theme => ({
 
 const Board: React.FC = () => {
   const { boardId } = useParams();
+  const addSticky = useStoreActions(actions => actions.data.boards.addSticky);
   const fetchBoard = useStoreActions(actions => actions.data.boards.fetchBoardByName);
   useEffect(() => {
     if (boardId) fetchBoard(boardId);
@@ -41,7 +42,7 @@ const Board: React.FC = () => {
     <>
       <AppBar position="static">
         <Toolbar>
-          <Fab className={classes.fabButton} color="secondary" aria-label="add">
+          <Fab className={classes.fabButton} color="secondary" aria-label="add" onClick={() => addSticky()}>
             <AddIcon />
           </Fab>
           <BoardIcon />
