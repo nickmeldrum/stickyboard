@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 import BoardIcon from '@material-ui/icons/Dashboard';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -16,6 +18,12 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     flexGrow: 1,
+  },
+  fabButton: {
+    position: 'absolute',
+    zIndex: 1,
+    top: 40,
+    left: 70,
   },
 }));
 
@@ -33,6 +41,9 @@ const Board: React.FC = () => {
     <>
       <AppBar position="static">
         <Toolbar>
+          <Fab className={classes.fabButton} color="secondary" aria-label="add">
+            <AddIcon />
+          </Fab>
           <BoardIcon />
           <Typography variant="h6" className={classes.title}>
             {board.id}
