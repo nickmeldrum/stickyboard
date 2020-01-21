@@ -28,6 +28,7 @@ export type Boards = {
   currentBoard: Board | null;
   setCurrentBoard: Action<Boards, Board>;
   fetchBoardByName: Thunk<Boards, string>;
+  deleteSticky: Action<Boards, string>;
   updateStickyColumn: Action<Boards, NewStickyColumn>;
   updateStickyText: Action<Boards, UpdateStickyText>;
   initialLoad: Action<Boards, string[]>;
@@ -47,6 +48,11 @@ const data: Data = {
     fetchBoardByName: thunk(async (actions, payload) => {
       const board: Board = await api.board.get(payload);
       actions.setCurrentBoard(board);
+    }),
+    deleteSticky: action((state, payload) => {
+      if (!state.currentBoard) return;
+      const index = state.currentBoard.stickies.findIndex(s => s.id === payload);
+      if (index !== -1) state.currentBoard.stickies.splice(index, 1);
     }),
     updateStickyColumn: action((state, payload) => {
       if (!state.currentBoard) return;

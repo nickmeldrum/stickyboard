@@ -35,7 +35,7 @@ sticky
  * make sticky text editing cancel other text edits?
  * make other actions (click outside etc.) cancel text editing
  * edit text - saves on server
- * delete sticky
+ * delete sticky - saves on server
  * add sticky
 
 board
