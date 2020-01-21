@@ -1,14 +1,13 @@
-import React from 'react';
+import React, { KeyboardEvent } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import IconButton from '@material-ui/core/IconButton';
 import AcceptIcon from '@material-ui/icons/Check'
 import CancelIcon from '@material-ui/icons/Close'
 
 export interface StickyTextEntry {
-  id: string;
   text: string;
 };
 
@@ -22,20 +21,24 @@ const StickyTextEntrySchema = yup.object().shape({
 });
 
 export interface EditTextProps {
+  acceptChanges: (text: string) => void;
+  cancelEditing: () => void;
+  initialText: string;
 };
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    formContainer: {
-      margin: '1rem',
-      '& .MuiTextField-root': {
-        margin: '1rem 0',
-      },
-    },
-  }),
-);
+const useStyles = makeStyles(theme => ({
+  formContainer: {
+    '& > div > div': {
+      paddingTop: '0',
+      paddingLeft: '0',
+    }
+  },
+  textField: {
+    lineHeight: 1.5,
+  },
+}));
 
-const EditText: React.FC<EditTextProps> = () => {
+const EditText: React.FC<EditTextProps> = ({ initialText, acceptChanges, cancelEditing }) => {
   const classes = useStyles();
 
   const { register, handleSubmit, errors } = useForm<StickyTextEntry>({
@@ -43,7 +46,25 @@ const EditText: React.FC<EditTextProps> = () => {
   });
 
   const onSubmit = (textEntry: StickyTextEntry): void => {
-    console.log('onSumbit', textEntry);
+    acceptChanges(textEntry.text);
+  };
+
+  const textfieldKeyDown = (event: KeyboardEvent<HTMLInputElement>): void => {
+    if (event.keyCode === 27) { // escape pressed
+      event.preventDefault();
+      cancelEditing();
+      return;
+    }
+
+    if (event.keyCode === 13 && event.shiftKey) { // shift-enter pressed - assume newline
+      return;
+    }
+
+    if (event.keyCode === 13 && !event.shiftKey) { // enter pressed - assume accept changes
+      event.preventDefault();
+      handleSubmit(onSubmit)(event);
+      return;
+    }
   };
 
   return (
@@ -55,18 +76,24 @@ const EditText: React.FC<EditTextProps> = () => {
       <TextField
         inputRef={register}
         multiline
-        rows={3}
-        label="Text"
         name="text"
         error={!!errors.text}
+        InputProps={{
+          classes: {
+            input: classes.textField,
+          },
+        }}
         helperText={errors.text ? errors.text.message : ''}
         fullWidth
-        variant="outlined"
+        required
+        defaultValue={initialText}
+        autoFocus
+        onKeyDown={textfieldKeyDown}
       />
-      <IconButton aria-label="accept changes">
+      <IconButton aria-label="accept changes" type="submit">
         <AcceptIcon />
       </IconButton>
-      <IconButton aria-label="cancel changes">
+      <IconButton aria-label="cancel changes" onClick={() => cancelEditing()}>
         <CancelIcon />
       </IconButton>
     </form>

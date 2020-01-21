@@ -18,12 +18,18 @@ export interface NewStickyColumn {
   newColumn: string;
 };
 
+export interface UpdateStickyText {
+  id: string;
+  newText: string;
+};
+
 export type Boards = {
   itemNames: string[];
   currentBoard: Board | null;
   setCurrentBoard: Action<Boards, Board>;
   fetchBoardByName: Thunk<Boards, string>;
   updateStickyColumn: Action<Boards, NewStickyColumn>;
+  updateStickyText: Action<Boards, UpdateStickyText>;
   initialLoad: Action<Boards, string[]>;
 };
 
@@ -47,6 +53,12 @@ const data: Data = {
       const sticky = state.currentBoard.stickies.find(s => s.id === payload.id);
       if (!sticky) return;
       sticky.column = payload.newColumn;
+    }),
+    updateStickyText: action((state, payload) => {
+      if (!state.currentBoard) return;
+      const sticky = state.currentBoard.stickies.find(s => s.id === payload.id);
+      if (!sticky) return;
+      sticky.text = payload.newText;
     }),
     initialLoad: action((state, payload) => {
       state.itemNames = payload;

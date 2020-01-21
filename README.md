@@ -31,7 +31,10 @@ styling:
 
 sticky
 
- * edit text
+ * make sticky text editing autofocus highlight whole text or put cursor to end
+ * make sticky text editing cancel other text edits?
+ * make other actions (click outside etc.) cancel text editing
+ * edit text - saves on server
  * delete sticky
  * add sticky
 
