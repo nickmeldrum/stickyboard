@@ -17,6 +17,8 @@ Server uses Express - also `yarn start` to start it (it uses nodemon as a file w
 
 ### Web client
 
+Testing!
+
 drag n drop
 
  * save the column change
@@ -47,6 +49,7 @@ board
 
 ### Backend
 
+ * possibly move to appsync instead of a complex custom websockets implementation?
  * https://aws.amazon.com/blogs/mobile/building-fine-grained-authorization-using-amazon-cognito-user-pools-groups/
  * https://aws.amazon.com/blogs/compute/using-amazon-api-gateway-as-a-proxy-for-dynamodb/
  * research and setup cognito auth - with facebook/google/github integration?
