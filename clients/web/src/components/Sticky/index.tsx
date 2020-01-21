@@ -27,6 +27,9 @@ const useStyles = makeStyles(theme => ({
   card: {
     margin: '5px',
   },
+  deleteButton: {
+    marginLeft: 'auto',
+  },
 }));
 
 const Sticky: React.FC<StickyProps> = ({ sticky }) => {
@@ -69,7 +72,7 @@ const Sticky: React.FC<StickyProps> = ({ sticky }) => {
           { isEditing ? <EditText initialText={sticky.text} acceptChanges={acceptChanges} cancelEditing={cancelEditing} /> : StickyText }
         </CardContent>
         <CardActions>
-          <IconButton aria-label="delete sticky" onClick={deleteStickyClicked}>
+          <IconButton className={classes.deleteButton} aria-label="delete sticky" onClick={deleteStickyClicked}>
             <DeleteIcon />
           </IconButton>
         </CardActions>

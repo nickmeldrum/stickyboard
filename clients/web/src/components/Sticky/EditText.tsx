@@ -31,10 +31,18 @@ const useStyles = makeStyles(theme => ({
     '& > div > div': {
       paddingTop: '0',
       paddingLeft: '0',
-    }
+    },
+    '&:after': {
+      content: '""',
+      clear: 'both',
+      display: 'table',
+    },
   },
   textField: {
     lineHeight: 1.5,
+  },
+  button: {
+    float: 'right',
   },
 }));
 
@@ -90,11 +98,11 @@ const EditText: React.FC<EditTextProps> = ({ initialText, acceptChanges, cancelE
         autoFocus
         onKeyDown={textfieldKeyDown}
       />
-      <IconButton aria-label="accept changes" type="submit">
-        <AcceptIcon />
-      </IconButton>
-      <IconButton aria-label="cancel changes" onClick={() => cancelEditing()}>
+      <IconButton className={classes.button} aria-label="cancel changes" onClick={() => cancelEditing()}>
         <CancelIcon />
+      </IconButton>
+      <IconButton className={classes.button} aria-label="accept changes" type="submit">
+        <AcceptIcon />
       </IconButton>
     </form>
   );
