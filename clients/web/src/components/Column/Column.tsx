@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Column: React.FC<ColumnProps> = ({column, stickies}) => {
-  const updateStickyColumn = useStoreActions(actions => actions.data.boards.updateStickyColumn);
+  const updateStickyColumn = useStoreActions(actions => actions.data.updateStickyColumn);
   const [{ isOver, canDrop }, drop] = useDrop({
     accept: Types.Sticky,
     canDrop: (item: any) => item.column !== column,

@@ -29,12 +29,12 @@ const useStyles = makeStyles(theme => ({
 
 const Board: React.FC = () => {
   const { boardId } = useParams();
-  const addSticky = useStoreActions(actions => actions.data.boards.addSticky);
-  const fetchBoard = useStoreActions(actions => actions.data.boards.fetchBoardByName);
+  const addSticky = useStoreActions(actions => actions.ui.board.addSticky);
+  const fetchBoard = useStoreActions(actions => actions.data.fetchBoardByName);
   useEffect(() => {
     if (boardId) fetchBoard(boardId);
   }, [boardId, fetchBoard]);
-  const board = useStoreState(state => state.data.boards.currentBoard);
+  const board = useStoreState(state => state.data.board);
   const classes = useStyles();
 
   if (!board) return <div>Loading...</div>

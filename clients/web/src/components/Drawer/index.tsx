@@ -5,11 +5,11 @@ import DrawerMenu from './DrawerMenu';
 
 const Drawer: React.FC = () => {
   const toggleDrawer = useStoreActions(actions => {
-    return actions.ui.toggleDrawer;
+    return actions.ui.menus.toggleDrawer;
   });
 
   const drawerOpen: boolean = useStoreState(state => {
-    return state.ui.isDrawerOpen;
+    return state.ui.menus.isDrawerOpen;
   });
 
   const onOpen = () => toggleDrawer();

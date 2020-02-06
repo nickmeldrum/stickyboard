@@ -11,9 +11,9 @@ import HomeIcon from '@material-ui/icons/Home';
 import { useStoreState, useStoreActions } from 'store/hooks';
 
 const DrawerMenu: React.FC = () => {
-  const boardNames = useStoreState(state => state.data.boards.itemNames);
+  const boardNames = useStoreState(state => state.data.boardNames);
   const push = useStoreActions(actions => actions.routing.push);
-  const toggleDrawer = useStoreActions(actions => actions.ui.toggleDrawer);
+  const toggleDrawer = useStoreActions(actions => actions.ui.menus.toggleDrawer);
 
   const browseTo = (url: string) => {
     toggleDrawer();

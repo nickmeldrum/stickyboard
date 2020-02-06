@@ -4,5 +4,5 @@ import api from 'api';
 const actions = store.getActions();
 
 export default () => {
-  api.boards.get().then(data => actions.data.boards.initialLoad(data));
+  api.boards.get().then(data => actions.data.initialLoad(data));
 };

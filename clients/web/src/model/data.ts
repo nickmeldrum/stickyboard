@@ -23,58 +23,49 @@ export interface UpdateStickyText {
   newText: string;
 };
 
-export type Boards = {
-  itemNames: string[];
-  currentBoard: Board | null;
-  setCurrentBoard: Action<Boards, Board>;
-  fetchBoardByName: Thunk<Boards, string>;
-  addSticky: Action<Boards>;
-  deleteSticky: Action<Boards, string>;
-  updateStickyColumn: Action<Boards, NewStickyColumn>;
-  updateStickyText: Action<Boards, UpdateStickyText>;
-  initialLoad: Action<Boards, string[]>;
-};
-
 export interface Data {
-  boards: Boards;
+  boardNames: string[];
+  board: Board;
+  setCurrentBoard: Action<Data, Board>;
+  fetchBoardByName: Thunk<Data, string>;
+  deleteSticky: Action<Data, string>;
+  updateStickyColumn: Action<Data, NewStickyColumn>;
+  updateStickyText: Action<Data, UpdateStickyText>;
+  initialLoad: Action<Data, string[]>;
 };
 
 const data: Data = {
-  boards: {
-    itemNames: [],
-    currentBoard: null,
-    setCurrentBoard: action((state, payload) => {
-      state.currentBoard = payload;
-    }),
-    fetchBoardByName: thunk(async (actions, payload) => {
-      const board: Board = await api.board.get(payload);
-      actions.setCurrentBoard(board);
-    }),
-    addSticky: action((state, payload) => {
-      if (!state.currentBoard) return;
-      state.currentBoard.stickies.splice(0, 0, {id: 'new', text: '', column: state.currentBoard.columns[0]});
-    }),
-    deleteSticky: action((state, payload) => {
-      if (!state.currentBoard) return;
-      const index = state.currentBoard.stickies.findIndex(s => s.id === payload);
-      if (index !== -1) state.currentBoard.stickies.splice(index, 1);
-    }),
-    updateStickyColumn: action((state, payload) => {
-      if (!state.currentBoard) return;
-      const sticky = state.currentBoard.stickies.find(s => s.id === payload.id);
-      if (!sticky) return;
-      sticky.column = payload.newColumn;
-    }),
-    updateStickyText: action((state, payload) => {
-      if (!state.currentBoard) return;
-      const sticky = state.currentBoard.stickies.find(s => s.id === payload.id);
-      if (!sticky) return;
-      sticky.text = payload.newText;
-    }),
-    initialLoad: action((state, payload) => {
-      state.itemNames = payload;
-    }),
+  boardNames: [],
+  board: {
+    id: '',
+    columns: [],
+    stickies: [],
   },
+  setCurrentBoard: action((state, payload) => {
+    state.board = payload;
+  }),
+  fetchBoardByName: thunk(async (actions, payload) => {
+    const board: Board = await api.board.get(payload);
+    actions.setCurrentBoard(board);
+  }),
+  deleteSticky: action((state, payload) => {
+    const index = state.board.stickies.findIndex(s => s.id === payload);
+    if (index !== -1) state.board.stickies.splice(index, 1);
+  }),
+  updateStickyColumn: action((state, payload) => {
+    const sticky = state.board.stickies.find(s => s.id === payload.id);
+    if (!sticky) return;
+    sticky.column = payload.newColumn;
+  }),
+  updateStickyText: action((state, payload) => {
+    const sticky = state.board.stickies.find(s => s.id === payload.id);
+    if (!sticky) return;
+    if (sticky.id === 'new') sticky.id = 'unsaved';
+    sticky.text = payload.newText;
+  }),
+  initialLoad: action((state, payload) => {
+    state.boardNames = payload;
+  }),
 };
 
 export default data;

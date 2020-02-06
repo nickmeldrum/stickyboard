@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
 
 const TopAppBar: React.FC = () => {
   const toggleDrawer = useStoreActions(actions => {
-    return actions.ui.toggleDrawer;
+    return actions.ui.menus.toggleDrawer;
   });
 
   const menuButtonClicked = () => toggleDrawer();

@@ -34,8 +34,8 @@ const useStyles = makeStyles(theme => ({
 
 const Sticky: React.FC<StickyProps> = ({ sticky }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const updateStickyText = useStoreActions(actions => actions.data.boards.updateStickyText);
-  const deleteSticky = useStoreActions(actions => actions.data.boards.deleteSticky);
+  const updateStickyText = useStoreActions(actions => actions.data.updateStickyText);
+  const deleteSticky = useStoreActions(actions => actions.data.deleteSticky);
   const classes = useStyles();
   const [{ isDragging }, drag] = useDrag({
     item: { id: sticky.id, column: sticky.column, type: Types.Sticky },
