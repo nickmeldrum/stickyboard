@@ -1,3 +1,4 @@
+import uuid from 'uuid/v4';
 import { action, Action, thunk, Thunk } from 'easy-peasy';
 import api from 'api';
 
@@ -52,7 +53,7 @@ const data: Data = {
   }),
   addSticky: action((state, payload) => {
     if (!state.board.stickies.find(s => !s.text))
-      state.board.stickies.splice(0,0,{ clientId: 'some-new-guid-random', text: '', column: state.board.columns[0] })
+      state.board.stickies.splice(0,0,{ clientId: uuid(), text: '', column: state.board.columns[0] })
   }),
   deleteSticky: action((state, payload) => {
     const index = state.board.stickies.findIndex(s => s.clientId === payload);

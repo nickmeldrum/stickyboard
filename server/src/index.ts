@@ -30,28 +30,28 @@ interface BoardList { [key: string]: InternalBoard };
 
 const stickies: Sticky[] = [
   {
-    clientId: 'some-guid-1',
+    clientId: '2268382d-a8bb-45f5-b136-4a1ce655b541',
     id: '1',
     text: 'a sticky',
     boardId: 'board1',
     column: 'column1',
   },
   {
-    clientId: 'some-guid-2',
+    clientId: '2268382d-a8bb-45f5-b136-4a1ce655b542',
     id: '2',
     text: 'a sticky on the same column',
     boardId: 'board1',
     column: 'column1',
   },
   {
-    clientId: 'some-guid-3',
+    clientId: '2268382d-a8bb-45f5-b136-4a1ce655b543',
     id: '3',
     text: 'another sticky',
     boardId: 'board1',
     column: 'column2',
   },
   {
-    clientId: 'some-guid-4',
+    clientId: '2268382d-a8bb-45f5-b136-4a1ce655b544',
     id: '4',
     text: 'a sticky on the next board',
     boardId: 'board2',
