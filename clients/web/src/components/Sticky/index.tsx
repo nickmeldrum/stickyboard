@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Sticky: React.FC<StickyProps> = ({ sticky }) => {
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(!sticky.text);
   const updateStickyText = useStoreActions(actions => actions.data.updateStickyText);
   const deleteSticky = useStoreActions(actions => actions.data.deleteSticky);
   const classes = useStyles();
@@ -47,12 +47,13 @@ const Sticky: React.FC<StickyProps> = ({ sticky }) => {
   const startEditing = () => {
     setIsEditing(true);
   };
+
   const deleteStickyClicked = () => {
-    deleteSticky(sticky.id);
+    deleteSticky(sticky.clientId);
   };
 
   const acceptChanges = (text: string) => {
-    updateStickyText({id: sticky.id, newText: text});
+    updateStickyText({clientId: sticky.clientId, newText: text});
     setIsEditing(false);
   };
 

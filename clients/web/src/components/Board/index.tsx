@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
 
 const Board: React.FC = () => {
   const { boardId } = useParams();
-  const addSticky = useStoreActions(actions => actions.ui.board.addSticky);
+  const addSticky = useStoreActions(actions => actions.data.addSticky);
   const fetchBoard = useStoreActions(actions => actions.data.fetchBoardByName);
   useEffect(() => {
     if (boardId) fetchBoard(boardId);

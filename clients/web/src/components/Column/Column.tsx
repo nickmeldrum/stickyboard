@@ -51,7 +51,7 @@ const Column: React.FC<ColumnProps> = ({column, stickies}) => {
     <h2>{column}</h2>
     <ul>{stickies.map(sticky =>
       <Sticky
-          key={sticky.id}
+          key={sticky.clientId}
           sticky={sticky}
       />)}
     </ul>

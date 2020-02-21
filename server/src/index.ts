@@ -9,6 +9,7 @@ app.use(cors());
 app.use(express.json());
 
 interface Sticky {
+  clientId: string;
   id: string;
   text: string;
   boardId: string;
@@ -29,24 +30,28 @@ interface BoardList { [key: string]: InternalBoard };
 
 const stickies: Sticky[] = [
   {
+    clientId: 'some-guid-1',
     id: '1',
     text: 'a sticky',
     boardId: 'board1',
     column: 'column1',
   },
   {
+    clientId: 'some-guid-2',
     id: '2',
     text: 'a sticky on the same column',
     boardId: 'board1',
     column: 'column1',
   },
   {
+    clientId: 'some-guid-3',
     id: '3',
     text: 'another sticky',
     boardId: 'board1',
     column: 'column2',
   },
   {
+    clientId: 'some-guid-4',
     id: '4',
     text: 'a sticky on the next board',
     boardId: 'board2',

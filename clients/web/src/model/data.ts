@@ -8,8 +8,9 @@ export interface Board {
 };
 
 export interface Sticky {
-  id: string;
-  column: string;
+  clientId: string;
+  id?: string;
+  column?: string;
   text: string;
 };
 
@@ -19,7 +20,7 @@ export interface NewStickyColumn {
 };
 
 export interface UpdateStickyText {
-  id: string;
+  clientId: string;
   newText: string;
 };
 
@@ -28,6 +29,7 @@ export interface Data {
   board: Board;
   setCurrentBoard: Action<Data, Board>;
   fetchBoardByName: Thunk<Data, string>;
+  addSticky: Action<Data>;
   deleteSticky: Action<Data, string>;
   updateStickyColumn: Action<Data, NewStickyColumn>;
   updateStickyText: Action<Data, UpdateStickyText>;
@@ -48,19 +50,20 @@ const data: Data = {
     const board: Board = await api.board.get(payload);
     actions.setCurrentBoard(board);
   }),
+  addSticky: action((state, payload) => {
+    if (!state.board.stickies.find(s => !s.text))
+      state.board.stickies.splice(0,0,{ clientId: 'some-new-guid-random', text: '', column: state.board.columns[0] })
+  }),
   deleteSticky: action((state, payload) => {
-    const index = state.board.stickies.findIndex(s => s.id === payload);
+    const index = state.board.stickies.findIndex(s => s.clientId === payload);
     if (index !== -1) state.board.stickies.splice(index, 1);
   }),
   updateStickyColumn: action((state, payload) => {
-    const sticky = state.board.stickies.find(s => s.id === payload.id);
-    if (!sticky) return;
+    const sticky = state.board.stickies.find(s => s.id === payload.id)!;
     sticky.column = payload.newColumn;
   }),
   updateStickyText: action((state, payload) => {
-    const sticky = state.board.stickies.find(s => s.id === payload.id);
-    if (!sticky) return;
-    if (sticky.id === 'new') sticky.id = 'unsaved';
+    const sticky = state.board.stickies.find(s => s.clientId === payload.clientId)!;
     sticky.text = payload.newText;
   }),
   initialLoad: action((state, payload) => {

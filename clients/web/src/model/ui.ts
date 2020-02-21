@@ -5,15 +5,8 @@ interface Menus {
     toggleDrawer: Action<Menus, void>;
 };
 
-interface Board {
-    newSticky: boolean;
-    saved: boolean;
-    addSticky: Action<Board>;
-};
-
 export interface Ui {
   menus: Menus;
-  board: Board;
 };
 
 const ui: Ui = {
@@ -21,13 +14,6 @@ const ui: Ui = {
     isDrawerOpen: false,
     toggleDrawer: action((state) => {
       state.isDrawerOpen = !state.isDrawerOpen;
-    }),
-  },
-  board: {
-    newSticky: false,
-    saved: false,
-    addSticky: action((state, payload) => {
-      state.newSticky = true;
     }),
   },
 };
