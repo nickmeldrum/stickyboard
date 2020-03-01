@@ -1,0 +1,29 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-stickyboard-dev-74508-authRole",
+            "UnauthRoleArn": "arn:aws:iam::277625601220:role/amplify-stickyboard-dev-74508-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::277625601220:role/amplify-stickyboard-dev-74508-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-stickyboard-dev-74508-deployment",
+            "UnauthRoleName": "amplify-stickyboard-dev-74508-unauthRole",
+            "StackName": "amplify-stickyboard-dev-74508",
+            "StackId": "arn:aws:cloudformation:us-east-1:277625601220:stack/amplify-stickyboard-dev-74508/9f6de8a0-5b90-11ea-88b1-0a8540e42a70",
+            "AmplifyAppId": "d1n2iul8ebx2nh"
+        },
+        "categories": {
+            "function": {
+                "stickyboard5d045723CustomMessage": {
+                    "REDIRECTURL": "http://localhost:3000/",
+                    "EMAILSUBJECT": "Confirmation",
+                    "EMAILMESSAGE": "Body text"
+                }
+            },
+            "auth": {
+                "stickyboard5d045723": {
+                    "hostedUIProviderCreds": "[{\"ProviderName\":\"Facebook\",\"client_id\":\"481377265390067\",\"client_secret\":\"50fded57fdef2929f59b9032e3f04978\"},{\"ProviderName\":\"Google\",\"client_id\":\"306688635340-h7fsujldbe7s7ure2v4oq4sdmphtp4a5.apps.googleusercontent.com\",\"client_secret\":\"THPyf41F0Csmzwb0BBkm_tXD\"}]"
+                }
+            }
+        }
+    }
+}

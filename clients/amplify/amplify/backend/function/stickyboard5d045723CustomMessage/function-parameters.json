@@ -1,0 +1,14 @@
+{
+    "trigger": true,
+    "modules": [
+        "verification-link"
+    ],
+    "parentResource": "stickyboard5d045723",
+    "functionName": "stickyboard5d045723CustomMessage",
+    "parentStack": "auth",
+    "triggerEnvs": "[{\"key\":\"RESOURCENAME\",\"value\":\"resourceName\"}]",
+    "triggerTemplate": "CustomMessage.json.ejs",
+    "roleName": "stickyboard5d045723CustomMessage",
+    "skipEdit": true,
+    "resourceName": "stickyboard5d045723CustomMessage"
+}
