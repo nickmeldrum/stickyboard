@@ -36,10 +36,6 @@ sticky
  * make other actions (click outside etc.) cancel text editing
  * edit text - saves on server
  * delete sticky - saves on server
- * add sticky - wip todo:
-    1. based on new sticky having no id
-    2. need to restrict ability to only have 1 new one at a time
-    3. seems to be a bug accepting changes on a new sticky atm
 
 board
 

@@ -1,7 +1,7 @@
 import { setupApi } from './api-call';
 import { Board, Sticky } from 'model/data';
 
-const host = 'http://localhost:4000';
+const host = 'http://localhost:4001';
 const baseUrl = '/api/'
 
 const { get, put } = setupApi(host, baseUrl);

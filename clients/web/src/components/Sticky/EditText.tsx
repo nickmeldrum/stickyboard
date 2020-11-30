@@ -98,9 +98,11 @@ const EditText: React.FC<EditTextProps> = ({ initialText, acceptChanges, cancelE
         autoFocus
         onKeyDown={textfieldKeyDown}
       />
+      { initialText && (
       <IconButton className={classes.button} aria-label="cancel changes" onClick={() => cancelEditing()}>
         <CancelIcon />
       </IconButton>
+      )}
       <IconButton className={classes.button} aria-label="accept changes" type="submit">
         <AcceptIcon />
       </IconButton>
